@@ -36,7 +36,7 @@ build/
 *.log
 
 # Ignoring dist folder content
-dist/*
+#dist/*
 
 # Ignoring visual studio
 .vs
@@ -57,4 +57,4 @@ selenium-debug.log
 .tool-versions
 
 # build files
-dist/
+#dist/

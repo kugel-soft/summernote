@@ -24,15 +24,14 @@ export default class Clipboard {
     if (clipboardData && clipboardData.items && clipboardData.items.length) {
       const clipboardFiles = clipboardData.files;
       const clipboardText = clipboardData.getData('Text');
-
-      // paste img file
-      if (clipboardFiles.length > 0 && this.options.allowClipboardImagePasting) {
+      const clipboardHtml = clipboardData.getData('text/html');
+      if (clipboardHtml && (clipboardHtml.indexOf('Word.Document') >= 0 || clipboardHtml.indexOf('Excel.Sheet') >= 0 || clipboardHtml.indexOf('<xml') >= 0)) {
+        this.context.invoke('editor.pasteHTML', clipboardText.replace(/\n/g,'<br>'));
+        event.preventDefault();
+      } else if (clipboardFiles.length > 0 && this.options.allowClipboardImagePasting) {
         this.context.invoke('editor.insertImagesOrCallback', clipboardFiles);
         event.preventDefault();
-      }
-
-      // paste text with maxTextLength check
-      if (clipboardText.length > 0 && this.context.invoke('editor.isLimited', clipboardText.length)) {
+      } else if (clipboardText.length > 0 && this.context.invoke('editor.isLimited', clipboardText.length)) {
         event.preventDefault();
       }
     } else if (window.clipboardData) {
