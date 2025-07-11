@@ -63,7 +63,6 @@
     "less-loader": "^12.2.0",
     "mini-css-extract-plugin": "^2.3.0",
     "mocha": "^10.5.2",
-    "pinst": "^3.0.0",
     "postcss": "^8.2.6",
     "postcss-escape-generated-content-string": "^3.0.0",
     "postcss-loader": "^8.1.1",
